@@ -3,10 +3,11 @@ import matplotlib.pyplot as plt
 from tensorflow.keras import layers, models
 from tensorflow.keras.models import load_model
 from sklearn.model_selection import train_test_split
+import os
 
 
-
-model = load_model('/home/furkan/imu-master-hw/model_training_with_ros/path_classification_model.h5') 
+model_path = os.path.join(os.path.dirname(__file__), 'path_classification_model.h5')
+model = load_model(model_path) 
 
 
 
@@ -140,8 +141,6 @@ x_test_samples_rotated = [rotate_data(x_test_samples[i], 45) for i in range(len(
 
 # Prediction step
 predictions = model.predict(np.array(x_test_samples_rotated))
-
-print(predictions)
 
 # Converting prediction to labels
 predicted_labels = np.argmax(predictions, axis=1)
