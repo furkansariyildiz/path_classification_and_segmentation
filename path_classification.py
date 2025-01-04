@@ -132,12 +132,12 @@ x_data, y_data = create_data_sets()
 
 
 # Creating test values
-x_test_samples = np.array([generate_curvy_road(1000, 1, 0.1),
-                           generate_straight_road(1000),
-                           generate_triangle_road(1000, 5, 5)])
+x_test_samples = np.array([generate_curvy_road(1000, 0.2, 1.0, noise_scale=0),
+                           generate_straight_road(1000, noise_scale=0),
+                           generate_triangle_road(1000, 5, 5, noise_scale=0)])
 
 # Rotate roads
-x_test_samples_rotated = [rotate_data(x_test_samples[i], 45) for i in range(len(x_test_samples))]
+x_test_samples_rotated = [rotate_data(x_test_samples[i], 0) for i in range(len(x_test_samples))]
 
 # Prediction step
 predictions = model.predict(np.array(x_test_samples_rotated))
