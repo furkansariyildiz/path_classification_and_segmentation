@@ -7,7 +7,18 @@ import os
 
 
 model_path = os.path.join(os.path.dirname(__file__), 'path_classification_model.h5')
-model = load_model(model_path) 
+
+model = models.Sequential([
+    layers.Conv1D(32, 3, activation='relu', input_shape=(1000, 2)),
+    layers.MaxPooling1D(2),
+    layers.Conv1D(64, 3, activation='relu'),
+    layers.MaxPooling1D(2),
+    layers.Flatten(),
+    layers.Dense(64, activation='relu'),
+    layers.Dense(3, activation='softmax')  # 3 class: Curvy, Straight, Triangle Wave
+])
+
+model.load_weights(model_path) 
 
 
 
